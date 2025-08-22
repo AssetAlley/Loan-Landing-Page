@@ -14,7 +14,6 @@ export default function Shopfit() {
       <MatWelcome />
       <Calculator />
       <MatFaq />
-      <Hero02 />
       <AuthenticationForm />
       </MantineProvider>
     </>

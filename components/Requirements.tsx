@@ -8,6 +8,7 @@ import {
   Box,
   Button,
   Card,
+  Center,
   Container,
   ContainerProps,
   Flex,
@@ -32,8 +33,8 @@ const Cell = ({ description, ...props }: { description: string; } & HTMLMotionPr
     style={{ borderRadius: 'var(--mantine-radius-lg)', ...props.style }}
   >
     <Card className={classes.card} h="100%" withBorder>
-      <Box mt="xs">
-        <Text fw={600} c='var(--mantine-color-white)'>{description}</Text>
+      <Box>
+          <Text fw={600} fz={30} c='var(--mantine-color-white)'>{description}</Text>
       </Box>
     </Card>
   </motion.div>

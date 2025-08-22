@@ -81,7 +81,7 @@ const FaqCell = ({ question, answer }: Faq) => (
   </Box>
 );
 
-export const SoftFaq = () => {
+export const BrandFaq = () => {
   const isDesktop = useMediaQuery('(min-width: 1024px)');
 
   return (
@@ -108,7 +108,7 @@ export const SoftFaq = () => {
       <Container size="md" style={{zIndex:1}}>
         <Stack gap="xs" align="center">
           <JumboTitle order={2} fz="sm" ta="center" style={{ textWrap: 'balance' }} mb="sm" c="#01E194">
-            Why Get a Loan For Your Software?
+            Why Get a Loan For Your Branding?
           </JumboTitle>
         </Stack>
       </Container>

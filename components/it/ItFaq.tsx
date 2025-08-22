@@ -30,7 +30,7 @@ const FAQ: Faq[] = [
     value: 'charge',
     question: 'Only Charge on Use',
     answer:
-      'No charge if setup but not used',
+      'No charge if the loan is setup but not used',
   },
   {
     value: 'security',
@@ -49,7 +49,7 @@ assets within the business)</>
     value: 'setup',
     question: 'No Setup Cost',
     answer:
-      'No setup cost or ongoing fees',
+      'No setup cost for the loan or ongoing fees',
   },
 ];
 
@@ -81,7 +81,7 @@ const FaqCell = ({ question, answer }: Faq) => (
   </Box>
 );
 
-export const SoftFaq = () => {
+export const ITFaq = () => {
   const isDesktop = useMediaQuery('(min-width: 1024px)');
 
   return (
@@ -108,7 +108,7 @@ export const SoftFaq = () => {
       <Container size="md" style={{zIndex:1}}>
         <Stack gap="xs" align="center">
           <JumboTitle order={2} fz="sm" ta="center" style={{ textWrap: 'balance' }} mb="sm" c="#01E194">
-            Why Get a Loan For Your Software?
+            Why Get a Loan For Your IT Setup?
           </JumboTitle>
         </Stack>
       </Container>

@@ -27,21 +27,6 @@ const FAQ: Faq[] = [
     answer: 'Repayments are calculated over 5 years'
   },
   {
-    value: 'extra-repayment',
-    question: 'Optional Extra Repayments',
-    answer:
-      'Make extra repayments towards facility to lower monthly repayments',
-  },
-  {
-    value: 'penalty',
-    question: "Repay Anytime Without Penalty",
-    answer:
-    <>
-      'Repay anytime without penalties and reuse the
-facility for business costs that traditional lenders won’t
-finance (materials, inventory, software, fit-out, etc.)'</>
-  },
-  {
     value: 'charge',
     question: 'Only Charge on Use',
     answer:
@@ -51,8 +36,8 @@ finance (materials, inventory, software, fit-out, etc.)'</>
     value: 'security',
     question: 'No Additional Security Needed',
     answer:
-    <>  'No additional security required (personal property or
-assets within the business)'</>
+    <>  No additional security required (personal property or
+assets within the business)</>
   },
   {
     value: 'cost',

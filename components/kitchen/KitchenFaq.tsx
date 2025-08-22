@@ -81,16 +81,16 @@ const FaqCell = ({ question, answer }: Faq) => (
   </Box>
 );
 
-export const SoftFaq = () => {
+export const KitchenFaq = () => {
   const isDesktop = useMediaQuery('(min-width: 1024px)');
 
   return (
   <BackgroundImage
-  src={isDesktop ? "/meeting.jpg" : ""} // Load image only on desktop
+  src={isDesktop ? "/kitchen-bg.png" : ""} // Load image only on desktop
   style={{
     backgroundColor: 'rgba(0, 0, 0, 0.8)', // Always keep the dark overlay
     backgroundImage: isDesktop
-      ? 'linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url(/meeting.jpg)'
+      ? 'linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url(/kitchen-bg.png)'
       : 'linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8))',
     backgroundSize: 'cover',
     backgroundPosition: 'center',
@@ -108,7 +108,7 @@ export const SoftFaq = () => {
       <Container size="md" style={{zIndex:1}}>
         <Stack gap="xs" align="center">
           <JumboTitle order={2} fz="sm" ta="center" style={{ textWrap: 'balance' }} mb="sm" c="#01E194">
-            Why Get a Loan For Your Software?
+            Why Get a Loan For Your Kitchen Design?
           </JumboTitle>
         </Stack>
       </Container>

@@ -121,7 +121,6 @@ export default function Main() {
       <Welcome darkMode={params.darkMode} customLogo={params.customLogo} businessType={params.businessType} />
       <Calculator showWeekly={params.calculatorWeekly} showMonthly={params.calculatorMonthly}/>
       {!params.compact && <Faq01 businessType={params.businessType} customLogo={params.customLogo} />}
-      <Hero02 />
       <AuthenticationForm />
     </MantineProvider>
   );
