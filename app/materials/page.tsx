@@ -1,20 +1,21 @@
+import { ColorSchemeScript, MantineProvider } from '@mantine/core';
 import { Logos03 } from '@/components/AnimatedLogos';
-import { MatWelcome } from '@/components/materials/MatWelcome';
-import { MatFaq } from '@/components/materials/MatFaq';
-import { Calculator } from '@/components/Calculator';
 import { AuthenticationForm } from '@/components/AuthenticationForm';
+import { Calculator } from '@/components/Calculator';
 import { ColorSchemeButton } from '@/components/ColorScheme';
+import { MatFaq } from '@/components/materials/MatFaq';
+import { MatWelcome } from '@/components/materials/MatWelcome';
 import { Hero02 } from '@/components/Requirements';
-import { MantineProvider, ColorSchemeScript } from '@mantine/core';
+
 export default function Shopfit() {
-    return (
+  return (
     <>
       <ColorSchemeScript forceColorScheme="dark" />
       <MantineProvider forceColorScheme="dark">
-      <MatWelcome />
-      <Calculator />
-      <MatFaq />
-      <AuthenticationForm />
+        <MatWelcome />
+        <Calculator />
+        <MatFaq />
+        <AuthenticationForm />
       </MantineProvider>
     </>
   );

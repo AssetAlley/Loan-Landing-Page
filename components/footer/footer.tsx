@@ -1,7 +1,7 @@
 'use client';
 
-import { Box, Container, Flex, Image, Text } from '@mantine/core';
 import NextImage from 'next/image';
+import { Box, Container, Flex, Image, Text } from '@mantine/core';
 import classes from './footer.module.css';
 
 export const Footer01 = () => (

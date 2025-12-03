@@ -1,14 +1,12 @@
 'use client';
 
-import { Text, Title, Image, Flex, Grid, Divider} from '@mantine/core';
-import classes from './Welcome.module.css';
-import image from '../../public/AA_Dark_Logo.svg';
 import NextImage from 'next/image';
-import { JumboTitle } from '../JumboTitle';
-import { motion } from 'motion/react'
+import { motion } from 'motion/react';
+import { Divider, Flex, Grid, Image, Text, Title } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
-
-
+import image from '../../public/AA_Dark_Logo.svg';
+import { JumboTitle } from '../JumboTitle';
+import classes from './Welcome.module.css';
 
 export function KitchenWelcome() {
   const isDesktop = useMediaQuery('(min-width: 768px)');
@@ -20,13 +18,7 @@ export function KitchenWelcome() {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
-        <Flex
-          justify="center"
-          align="center"
-          pt="md"
-          wrap="wrap"
-          gap="md"   
-        >
+        <Flex justify="center" align="center" pt="md" wrap="wrap" gap="md">
           <NextImage
             src="/Hospo3.png"
             alt="Hospo Dojo logo"
@@ -39,8 +31,8 @@ export function KitchenWelcome() {
             }}
           />
           <Divider
-            visibleFrom='md'
-            orientation='vertical'
+            visibleFrom="md"
+            orientation="vertical"
             style={{
               width: '2px',
               height: 'auto',
@@ -59,15 +51,7 @@ export function KitchenWelcome() {
             }}
           />
         </Flex>
-        <JumboTitle
-          c="#01E194"
-          ta="center"
-          fz="xs"
-          maw={900}
-          mx="auto"
-          mt="xl"
-          fw={700}
-        >
+        <JumboTitle c="#01E194" ta="center" fz="xs" maw={900} mx="auto" mt="xl" fw={700}>
           Finance your commercial kitchen designs
         </JumboTitle>
       </motion.div>

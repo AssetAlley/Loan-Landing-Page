@@ -1,14 +1,14 @@
 'use client';
 
+import { IconMoon, IconSun } from '@tabler/icons-react';
 import {
   Box,
   Button,
-  type ButtonProps,
   Tooltip,
   useComputedColorScheme,
   useMantineColorScheme,
+  type ButtonProps,
 } from '@mantine/core';
-import { IconMoon, IconSun } from '@tabler/icons-react';
 
 export type ColorSchemeButtonProps = ButtonProps & {
   iconSize?: number;
@@ -26,34 +26,18 @@ export const ColorSchemeButton = ({
   });
 
   return (
-    <Tooltip
-      label={`${computedColorScheme === 'dark' ? 'Light' : 'Dark'} mode`}
-    >
+    <Tooltip label={`${computedColorScheme === 'dark' ? 'Light' : 'Dark'} mode`}>
       <Button
         w={64}
         h={64}
         p={0}
         variant="subtle"
-        onClick={() =>
-          setColorScheme(computedColorScheme === 'light' ? 'dark' : 'light')
-        }
+        onClick={() => setColorScheme(computedColorScheme === 'light' ? 'dark' : 'light')}
         aria-label="Toggle color scheme"
         {...buttonProps}
       >
-        <Box
-          p={0}
-          component={IconSun}
-          stroke={iconStroke}
-          size={iconSize}
-          lightHidden
-        />
-        <Box
-          p={0}
-          component={IconMoon}
-          stroke={iconStroke}
-          size={iconSize}
-          darkHidden
-        />
+        <Box p={0} component={IconSun} stroke={iconStroke} size={iconSize} lightHidden />
+        <Box p={0} component={IconMoon} stroke={iconStroke} size={iconSize} darkHidden />
       </Button>
     </Tooltip>
   );

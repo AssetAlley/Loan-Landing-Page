@@ -1,14 +1,14 @@
 'use client';
 
-import { Logos03 } from '@/components/AnimatedLogos';
-import { Welcome } from '@/components/EmbedComponents/EWelcome';
-import { Faq01 } from '@/components/EmbedComponents/EFaq';
-import { Calculator } from '@/components/EmbedComponents/ECalculator';
-import { AuthenticationForm } from '@/components/EmbedComponents/EAuthenticationForm';
-import { ColorSchemeButton } from '@/components/ColorScheme';
-import { Hero02 } from '@/components/EmbedComponents/ERequirements';
+import { useEffect, useState } from 'react';
 import { colorsTuple, createTheme, MantineProvider } from '@mantine/core';
-import { useState, useEffect } from 'react';
+import { Logos03 } from '@/components/AnimatedLogos';
+import { ColorSchemeButton } from '@/components/ColorScheme';
+import { AuthenticationForm } from '@/components/EmbedComponents/EAuthenticationForm';
+import { Calculator } from '@/components/EmbedComponents/ECalculator';
+import { Faq01 } from '@/components/EmbedComponents/EFaq';
+import { Hero02 } from '@/components/EmbedComponents/ERequirements';
+import { Welcome } from '@/components/EmbedComponents/EWelcome';
 
 // Define the type for the URL parameters state
 type Params = {
@@ -40,27 +40,28 @@ export default function Main() {
     buttonColor: '#FFFFFF',
     unfilledBarColor: '#848484',
     calculatorWeekly: true,
-    calculatorMonthly: false
+    calculatorMonthly: false,
   });
 
   // useEffect to fetch and update URL parameters when the component mounts
   useEffect(() => {
     // Utility function to fetch URL parameters with defaults
     function getUrlParams(): Params {
-      if (typeof window === 'undefined') {return {
-        compact: false,
-        businessType: 'website',
-        customLogo: false,
-        darkMode: true,
-        backgroundColor: '#242424',
-        headerTextColor: '#DDDDDD',
-        smallTextColor: '#FFFFFF',
-        tertiaryTextColor: '#000000',
-        buttonColor: '#FFFFFF',
-        unfilledBarColor: '#848484',
-        calculatorWeekly: true,
-        calculatorMonthly: false    
-      }; // return default values for SSR
+      if (typeof window === 'undefined') {
+        return {
+          compact: false,
+          businessType: 'website',
+          customLogo: false,
+          darkMode: true,
+          backgroundColor: '#242424',
+          headerTextColor: '#DDDDDD',
+          smallTextColor: '#FFFFFF',
+          tertiaryTextColor: '#000000',
+          buttonColor: '#FFFFFF',
+          unfilledBarColor: '#848484',
+          calculatorWeekly: true,
+          calculatorMonthly: false,
+        }; // return default values for SSR
       }
 
       const params = new URLSearchParams(window.location.search || {});
@@ -76,8 +77,7 @@ export default function Main() {
         buttonColor: params.get('aaButtonColor') || '#01E194',
         unfilledBarColor: params.get('aaUnfilledBarColor') || '#2E2E2E',
         calculatorWeekly: params.get('aaCalculatorWeekly') === 'true',
-        calculatorMonthly: params.get('aaCalculatorMonthly') === 'true'
-    
+        calculatorMonthly: params.get('aaCalculatorMonthly') === 'true',
       };
     }
 
@@ -118,9 +118,15 @@ export default function Main() {
 
   return (
     <MantineProvider theme={theme}>
-      <Welcome darkMode={params.darkMode} customLogo={params.customLogo} businessType={params.businessType} />
-      <Calculator showWeekly={params.calculatorWeekly} showMonthly={params.calculatorMonthly}/>
-      {!params.compact && <Faq01 businessType={params.businessType} customLogo={params.customLogo} />}
+      <Welcome
+        darkMode={params.darkMode}
+        customLogo={params.customLogo}
+        businessType={params.businessType}
+      />
+      <Calculator showWeekly={params.calculatorWeekly} showMonthly={params.calculatorMonthly} />
+      {!params.compact && (
+        <Faq01 businessType={params.businessType} customLogo={params.customLogo} />
+      )}
       <AuthenticationForm />
     </MantineProvider>
   );

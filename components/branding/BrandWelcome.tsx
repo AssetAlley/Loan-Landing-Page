@@ -1,8 +1,8 @@
-import { Text, Title, Image, Flex } from '@mantine/core';
-import classes from '../Welcome/Welcome.module.css';
-import image from '../../public/AA_Dark_Logo.svg';
 import NextImage from 'next/image';
+import { Flex, Image, Text, Title } from '@mantine/core';
+import image from '../../public/AA_Dark_Logo.svg';
 import { JumboTitle } from '../JumboTitle';
+import classes from '../Welcome/Welcome.module.css';
 
 export function BrandWelcome() {
   return (

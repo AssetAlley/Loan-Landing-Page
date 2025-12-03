@@ -1,28 +1,31 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { IconAt, IconHash, IconCircleCheckFilled, IconPaperclip } from '@tabler/icons-react';
+import { useEffect, useState } from 'react';
+import { createClient } from '@supabase/supabase-js';
+import { IconAt, IconCircleCheckFilled, IconHash, IconPaperclip } from '@tabler/icons-react';
+import validator from 'validator';
 import {
   Button,
   Checkbox,
+  Container,
+  FileInput,
+  Flex,
   Group,
   LoadingOverlay,
   Paper,
   Text,
-  TextInput,
   Textarea,
-  Container,
-  Flex,
+  TextInput,
   useMantineTheme,
-  FileInput
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { JumboTitle } from '../JumboTitle';
-import { createClient } from '@supabase/supabase-js';
-import validator from 'validator';
-import classes from './EAuthenticationForm.module.css'
+import classes from './EAuthenticationForm.module.css';
 
-const supabase = createClient("https://hfsysehrdshrbtmjsgcx.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imhmc3lzZWhyZHNocmJ0bWpzZ2N4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mzk0MjMyMzIsImV4cCI6MjA1NDk5OTIzMn0.S2q4Oza4s70afQlODHW-G3OUWIGWxOJ2nOxIzZJ8IIk");
+const supabase = createClient(
+  'https://hfsysehrdshrbtmjsgcx.supabase.co',
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imhmc3lzZWhyZHNocmJ0bWpzZ2N4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mzk0MjMyMzIsImV4cCI6MjA1NDk5OTIzMn0.S2q4Oza4s70afQlODHW-G3OUWIGWxOJ2nOxIzZJ8IIk'
+);
 
 export interface AuthenticationFormProps {
   noShadow?: boolean;
@@ -52,7 +55,7 @@ export function AuthenticationForm({
       email: '',
       phone: '',
       contact: false,
-      comments: ''
+      comments: '',
     },
   });
 
@@ -66,7 +69,7 @@ export function AuthenticationForm({
   const handleSubmit = async () => {
     setLoading(true);
     setError(null);
-  
+
     let hasError = false;
     if (form.values.contact === false) {
       form.setFieldError('contact', 'Please agree');
@@ -77,197 +80,205 @@ export function AuthenticationForm({
       form.setFieldError('firstName', 'First name is required');
       hasError = true;
     }
-  
+
     if (!form.values.lastName.trim()) {
       form.setFieldError('lastName', 'Last name is required');
       hasError = true;
     }
-  
+
     if (!validator.isEmail(form.values.email)) {
       form.setFieldError('email', 'Invalid email address');
       hasError = true;
     }
-  
+
     if (!validator.isMobilePhone(form.values.phone, 'en-AU')) {
       form.setFieldError('phone', 'Invalid Australian phone number');
       hasError = true;
     }
-  
+
     if (hasError) {
       setLoading(false);
       return;
     }
-  
+
     await submitFormAPI();
     setLoading(false);
     setSubmitted(true);
   };
-  
+
   async function submitFormAPI() {
-    await supabase
-      .from('enquiries')
-      .insert({
-        first_name: form.values.firstName,
-        last_name: form.values.lastName,
-        phone: form.values.phone,
-        email: form.values.email,
-        referral: ref,
-        comments: form.values.comments
-      });
+    await supabase.from('enquiries').insert({
+      first_name: form.values.firstName,
+      last_name: form.values.lastName,
+      phone: form.values.phone,
+      email: form.values.email,
+      referral: ref,
+      comments: form.values.comments,
+    });
   }
 
   return (
     <Container size="xs" fluid bg={theme.colors.background[0]}>
-    <Container size="xs" px="md">
-      <JumboTitle order={2} fz="sm" ta="center" mb="sm" c={ theme.colors.header[0] }>
-        Contact Us Now
-      </JumboTitle>
-      <JumboTitle order={2} fz="xxs" ta="center" mb="sm" c={ theme.colors.secondary[0] }>
-        For a free enquiry with no impact to your credit score
-      </JumboTitle>
-      <Flex justify="center" align="center">
-        <Paper
-          p={noPadding ? 0 : 'lg'}
-          shadow={noShadow ? 'none' : 'sm'}
-          style={{
-            ...style,
-            position: 'relative',
-            backgroundColor: theme.colors.background[0],
-          }}
-        >
-          {submitted ? (
-            <Flex justify="center" align="center" direction="column" py="xl">
-              <IconCircleCheckFilled size={48} color="green" />
-              <Text mt="md" size="lg" style={{ color: theme.colors.header[0] }}>
-                Thank you.
-                We'll be in touch soon!
-              </Text>
-            </Flex>
-          ) : (
-            <form onSubmit={form.onSubmit(handleSubmit)}>
-              <LoadingOverlay visible={loading} />
-              <Group grow>
+      <Container size="xs" px="md">
+        <JumboTitle order={2} fz="sm" ta="center" mb="sm" c={theme.colors.header[0]}>
+          Contact Us Now
+        </JumboTitle>
+        <JumboTitle order={2} fz="xxs" ta="center" mb="sm" c={theme.colors.secondary[0]}>
+          For a free enquiry with no impact to your credit score
+        </JumboTitle>
+        <Flex justify="center" align="center">
+          <Paper
+            p={noPadding ? 0 : 'lg'}
+            shadow={noShadow ? 'none' : 'sm'}
+            style={{
+              ...style,
+              position: 'relative',
+              backgroundColor: theme.colors.background[0],
+            }}
+          >
+            {submitted ? (
+              <Flex justify="center" align="center" direction="column" py="xl">
+                <IconCircleCheckFilled size={48} color="green" />
+                <Text mt="md" size="lg" style={{ color: theme.colors.header[0] }}>
+                  Thank you. We'll be in touch soon!
+                </Text>
+              </Flex>
+            ) : (
+              <form onSubmit={form.onSubmit(handleSubmit)}>
+                <LoadingOverlay visible={loading} />
+                <Group grow>
+                  <TextInput
+                    color={theme.colors.header[0]}
+                    data-autofocus
+                    required
+                    placeholder="Your first name"
+                    label="First name"
+                    styles={{
+                      input: {
+                        color: theme.colors.tertiary[0],
+                        backgroundColor: theme.colors.header[0],
+                      },
+                      label: { color: theme.colors.secondary[0] },
+                      section: { color: theme.colors.secondary[0] },
+                    }}
+                    classNames={{ input: classes.textInput }}
+                    {...form.getInputProps('firstName')}
+                  />
+                  <TextInput
+                    required
+                    placeholder="Your last name"
+                    label="Last name"
+                    styles={{
+                      input: {
+                        color: theme.colors.secondary[0],
+                        backgroundColor: theme.colors.header[0],
+                      },
+                      label: { color: theme.colors.secondary[0] },
+                    }}
+                    classNames={{ input: classes.textInput }}
+                    {...form.getInputProps('lastName')}
+                  />
+                </Group>
                 <TextInput
-                  color={theme.colors.header[0]}
-                  data-autofocus
+                  mt="md"
                   required
-                  placeholder="Your first name"
-                  label="First name"
-                  styles = {{
-                    input: { color: theme.colors.tertiary[0], backgroundColor: theme.colors.header[0] },
-                    label: { color: theme.colors.secondary[0] },
-                    section: { color: theme.colors.secondary[0] },
-                  }}
-                  classNames={{ input: classes.textInput}}
-                  {...form.getInputProps('firstName')}
-                />
-                <TextInput
-                  required
-                  placeholder="Your last name"
-                  label="Last name"
+                  placeholder="Your phone Number"
+                  label="Phone"
+                  leftSection={<IconHash size={16} stroke={1.5} />}
                   styles={{
-                    input: { 
-                      color: theme.colors.secondary[0], 
+                    input: {
+                      color: theme.colors.secondary[0],
                       backgroundColor: theme.colors.header[0],
                     },
                     label: { color: theme.colors.secondary[0] },
+                    section: { color: theme.colors.secondary[0] },
                   }}
-                  classNames={{ input: classes.textInput}}
-                  {...form.getInputProps('lastName')}
+                  classNames={{ input: classes.textInput }}
+                  {...form.getInputProps('phone')}
                 />
-              </Group>
-              <TextInput
-                mt="md"
-                required
-                placeholder="Your phone Number"
-                label="Phone"
-                leftSection={<IconHash size={16} stroke={1.5} />}
-                styles = {{
-                  input: { color: theme.colors.secondary[0], backgroundColor: theme.colors.header[0] },
-                  label: { color: theme.colors.secondary[0] },
-                  section: { color: theme.colors.secondary[0] },
-                }}
-                classNames={{ input: classes.textInput}}
-                {...form.getInputProps('phone')}
-              />
-              <TextInput
-                mt="md"
-                required
-                placeholder="Your email address"
-                label="Email"
-                leftSection={<IconAt size={16} stroke={1.5} />}
-                styles = {{
-                  input: { color: theme.colors.secondary[0], backgroundColor: theme.colors.header[0] },
-                  label: { color: theme.colors.secondary[0] },
-                  section: { color: theme.colors.secondary[0] },
-                }}
-                classNames={{ input: classes.textInput}}
-                {...form.getInputProps('email')}
-              />
+                <TextInput
+                  mt="md"
+                  required
+                  placeholder="Your email address"
+                  label="Email"
+                  leftSection={<IconAt size={16} stroke={1.5} />}
+                  styles={{
+                    input: {
+                      color: theme.colors.secondary[0],
+                      backgroundColor: theme.colors.header[0],
+                    },
+                    label: { color: theme.colors.secondary[0] },
+                    section: { color: theme.colors.secondary[0] },
+                  }}
+                  classNames={{ input: classes.textInput }}
+                  {...form.getInputProps('email')}
+                />
                 <Textarea
-                mt="md"
-                placeholder="Details about your enquiry"
-                label="Comments"
-                styles = {{
-                  input: { color: theme.colors.secondary[0], backgroundColor: theme.colors.header[0] },
-                  label: { color: theme.colors.secondary[0] },
-                  section: { color: theme.colors.secondary[0] },
-                }}
-                classNames={{ input: classes.textInput}}
-                {...form.getInputProps('comments')}
-              />
-              <FileInput 
-                leftSection={icon} 
-                clearable 
-                mt="md" 
-                label="Optional: Upload your invoice to help us with your application" 
-                placeholder="Choose file"
-                accept=".jpg,.png,.pdf"
-                onChange={setFile} 
-                
-                styles = {{
-                  input: { color: theme.colors.secondary[0], backgroundColor: theme.colors.header[0] },
-                  label: { color: theme.colors.secondary[0] },
-                  section: { color: theme.colors.secondary[0] },
-                  placeholder: { color: "rgba(167, 167, 167, 0.884)" }
-                }}
+                  mt="md"
+                  placeholder="Details about your enquiry"
+                  label="Comments"
+                  styles={{
+                    input: {
+                      color: theme.colors.secondary[0],
+                      backgroundColor: theme.colors.header[0],
+                    },
+                    label: { color: theme.colors.secondary[0] },
+                    section: { color: theme.colors.secondary[0] },
+                  }}
+                  classNames={{ input: classes.textInput }}
+                  {...form.getInputProps('comments')}
+                />
+                <FileInput
+                  leftSection={icon}
+                  clearable
+                  mt="md"
+                  label="Optional: Upload your invoice to help us with your application"
+                  placeholder="Choose file"
+                  accept=".jpg,.png,.pdf"
+                  onChange={setFile}
+                  styles={{
+                    input: {
+                      color: theme.colors.secondary[0],
+                      backgroundColor: theme.colors.header[0],
+                    },
+                    label: { color: theme.colors.secondary[0] },
+                    section: { color: theme.colors.secondary[0] },
+                    placeholder: { color: 'rgba(167, 167, 167, 0.884)' },
+                  }}
                 />
 
-              <Checkbox
-                mt="xl"
-                label="I agree to be contacted by a member of Asset Alley"
-                color={theme.colors.header[0]}
-                style = {
-                  { color: theme.colors.secondary[0],
-                   }
-                }
-                styles = {
-                  { input: {
-                    color: theme.colors.secondary[0],
-                    borderColor: theme.colors.secondary[0],
+                <Checkbox
+                  mt="xl"
+                  label="I agree to be contacted by a member of Asset Alley"
+                  color={theme.colors.header[0]}
+                  style={{ color: theme.colors.secondary[0] }}
+                  styles={{
+                    input: {
+                      color: theme.colors.secondary[0],
+                      borderColor: theme.colors.secondary[0],
                     },
                   }}
-                {...form.getInputProps('contact', { type: 'checkbox' })}
-              />
+                  {...form.getInputProps('contact', { type: 'checkbox' })}
+                />
 
-              {error && (
-                <Text size="sm" mt="sm" style={{ color: theme.colors.secondary[0] }}>
-                  {error}
-                </Text>
-              )}
+                {error && (
+                  <Text size="sm" mt="sm" style={{ color: theme.colors.secondary[0] }}>
+                    {error}
+                  </Text>
+                )}
 
-              {!noSubmit && (
-                <Group justify="center" mt="xl">
-                  <Button style={{ backgroundColor: theme.colors.button[0] }} type="submit">
-                    Submit
-                  </Button>
-                </Group>
-              )}
-            </form>
-          )}
-        </Paper>
-      </Flex>
-    </Container>
+                {!noSubmit && (
+                  <Group justify="center" mt="xl">
+                    <Button style={{ backgroundColor: theme.colors.button[0] }} type="submit">
+                      Submit
+                    </Button>
+                  </Group>
+                )}
+              </form>
+            )}
+          </Paper>
+        </Flex>
+      </Container>
     </Container>
   );
 }
