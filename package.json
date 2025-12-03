@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "@mantine/core": "7.16.3",
-    "@mantine/form": "^7.16.3",
+    "@mantine/form": "^8.3.9",
     "@mantine/hooks": "7.16.3",
     "@next/bundle-analyzer": "15.3.2",
     "@next/third-parties": "15.3.2",
