@@ -2743,15 +2743,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/third-parties@npm:15.3.2":
-  version: 15.3.2
-  resolution: "@next/third-parties@npm:15.3.2"
+"@next/third-parties@npm:16.2.3":
+  version: 16.2.3
+  resolution: "@next/third-parties@npm:16.2.3"
   dependencies:
     third-party-capital: "npm:1.0.20"
   peerDependencies:
-    next: ^13.0.0 || ^14.0.0 || ^15.0.0
+    next: ^13.0.0 || ^14.0.0 || ^15.0.0 || ^16.0.0-beta.0
     react: ^18.2.0 || 19.0.0-rc-de68d2f4-20241204 || ^19.0.0
-  checksum: 10c0/7e2c6ac9beb2117a363e25b31a2241b56e02e449f8542ccd84c2c4b9e418c029e8b8f9e3f659f451f9c2a3b29a83e879c08faee4a201fb3c9240bc6915a6bd62
+  checksum: 10c0/63d598119e9a4fb3341ba687d8d8032e8457567b7e753394d4cf8aebce69e195c1616c158c965c0fed2adfba6627173dbb2c0c026b410461fd0b583ce95763c4
   languageName: node
   linkType: hard
 
@@ -9376,7 +9376,7 @@ __metadata:
     "@mantine/form": "npm:^8.3.9"
     "@mantine/hooks": "npm:7.16.3"
     "@next/bundle-analyzer": "npm:15.3.2"
-    "@next/third-parties": "npm:15.3.2"
+    "@next/third-parties": "npm:16.2.3"
     "@storybook/nextjs": "npm:^8.5.0"
     "@storybook/react": "npm:^8.5.0"
     "@supabase/supabase-js": "npm:^2.48.1"
